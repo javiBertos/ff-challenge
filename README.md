@@ -83,13 +83,13 @@ Use a CSS framework if it helps in the UI.
 
 # Tasks
 - [x] Create github repo
-- [ ] Create a Backbone app
-- [ ] Connect to API
+- [x] Create a Backbone app
+- [x] Connect to API
 - [ ] List elements
-- [ ] Show element details
+- [x] Show element details
 - [ ] Create new elements
 - [ ] Update existing elements
-- [ ] Remove elements
+- [x] Remove elements
 - [ ] Implement JS tests
 - [ ] Create Heroku app
 - [ ] Deploy to Heroku
