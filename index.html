@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/favicon.ico">
+
+        <title>FinanceFox Challenge</title>
+    </head>
+
+    <body>
+        <header>This is the header!!</header>
+
+        <section id="main">
+            <div id="listHolder"></div>
+
+            <div>
+                <button class="js-create-post">Create post</button>
+                <div id="postHolder"></div>
+                <div id="editHolder"></div>
+            '</div>
+        </section>
+
+        <footer>This is the footer!!</footer>
+
+        <!-- JS libraries -->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/underscore/underscore-min.js"></script>
+        <script src="/bower_components/backbone/backbone-min.js"></script>
+
+        <!-- App JS scripts -->
+        <script src="/app/main.view.js"></script>
+        <script src="/app/post.model.js"></script>
+        <script src="/app/post.collection.js"></script>
+        <script src="/app/postDetails.view.js"></script>
+        <script src="/app/postEdit.view.js"></script>
+
+        <!-- Init application -->
+        <script> var mainView = new MainView(); </script>
+    </body>
+</html>

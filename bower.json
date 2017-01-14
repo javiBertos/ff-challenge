@@ -1,0 +1,18 @@
+{
+    "name": "ff-challenge",
+    "description": "FinanceFox Challenge",
+    "version": "0.0.1",
+    "homepage": "https://github.com/javiBertos/ff-challenge",
+    "license": "MIT",
+    "private": true,
+    "author": {
+        "name": "Javier Bertos",
+        "email": "yo@javierbertos.name",
+        "url": "http://blog.javierbertos.name/"
+    },
+    "dependencies": {
+        "jquery": "^3.1.1",
+        "underscore": "^1.8.3",
+        "backbone": "^1.3.3"
+    }
+}

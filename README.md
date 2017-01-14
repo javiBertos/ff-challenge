@@ -83,21 +83,24 @@ Use a CSS framework if it helps in the UI.
 
 # Tasks
 - [x] Create github repo
-- [ ] Create a Backbone app
-- [ ] Connect to API
-- [ ] List elements
-- [ ] Show element details
-- [ ] Create new elements
-- [ ] Update existing elements
-- [ ] Remove elements
+- [x] Create a Backbone app
+- [x] Connect to API
+- [x] List elements
+- [x] Show element details
+- [x] Create new elements
+- [x] Update existing elements
+- [x] Remove elements
 - [ ] Implement JS tests
-- [ ] Create Heroku app
-- [ ] Deploy to Heroku
+- [x] Create Heroku app
+- [x] Deploy to Heroku :link: https://ff-challenge.herokuapp.com
+- [ ] Make it pretty :heart_decoration:
 - [ ] Build and API
 - [ ] Return list elements from own API
 - [ ] Return requested element from own API
 - [ ] Allow create new element on own API
 - [ ] Allow update element on own API
 - [ ] Allow remove element on own API
+- [ ] Create API Heroku app
+- [ ] Deploy API to Heroku
 - [ ] Play with geo :world_map:
 - [ ] Try to be creative :+1:
