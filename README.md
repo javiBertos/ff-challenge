@@ -92,12 +92,15 @@ Use a CSS framework if it helps in the UI.
 - [x] Remove elements
 - [ ] Implement JS tests
 - [x] Create Heroku app
-- [x] Deploy to Heroku
+- [x] Deploy to Heroku :link: https://ff-challenge.herokuapp.com
+- [ ] Make it pretty :heart_decoration:
 - [ ] Build and API
 - [ ] Return list elements from own API
 - [ ] Return requested element from own API
 - [ ] Allow create new element on own API
 - [ ] Allow update element on own API
 - [ ] Allow remove element on own API
+- [ ] Create API Heroku app
+- [ ] Deploy API to Heroku
 - [ ] Play with geo :world_map:
 - [ ] Try to be creative :+1:
