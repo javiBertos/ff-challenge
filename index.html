@@ -10,14 +10,13 @@
         <header>This is the header!!</header>
 
         <section id="main">
-            Main section
-            <div>
-                <button class="js-retrieve-post" data-id="18">Retrieve post</button>
-                <button class="js-create-post" data-id="18">Create post</button>
-            </div>
+            <div id="listHolder"></div>
 
-            <div id="postHolder"></div>
-            <div id="editHolder"></div>
+            <div>
+                <button class="js-create-post">Create post</button>
+                <div id="postHolder"></div>
+                <div id="editHolder"></div>
+            '</div>
         </section>
 
         <footer>This is the footer!!</footer>
@@ -30,6 +29,7 @@
         <!-- App JS scripts -->
         <script src="/app/main.view.js"></script>
         <script src="/app/post.model.js"></script>
+        <script src="/app/post.collection.js"></script>
         <script src="/app/postDetails.view.js"></script>
         <script src="/app/postEdit.view.js"></script>
 

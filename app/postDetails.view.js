@@ -8,6 +8,7 @@ var PostDetailsView = Backbone.View.extend({
 
     render: function() {
         var template = _.template(
+            '<h2>ID: <%= id %></h2>' +
             '<% if (title) { %><h3><%= title %></h3><% } %>' +
             '<% if (content) { %><p><%= content %></p><% } %>' +
             '<% if (lat && long) { %><ul>' +
@@ -15,11 +16,12 @@ var PostDetailsView = Backbone.View.extend({
             '<li>Long: <%= long %></li>' +
             '<li><a href="https://www.google.com/maps/search/<%= lat %>,<%= long %>" target="_blank">View on GMaps</a></li>' +
             '</ul><% } %>' +
-            '<% if (image_url) { %><img src="<%= image_url %>" alt="<%= title %>" title="<%= title %>"><% } %><br>' +
+            '<% if (image_url) { %><img src="<%= image_url %>" alt="<%= title %>" title="<%= title %>"><br><% } %>' +
             '<button class="js-edit-post">Edit post</button><br>' +
             '<button class="js-remove-post">Remove post</button>'
         );
         this.$el.html(template(this.model.toJSON()));
+        return this;
     },
 
     removePost: function(e) {

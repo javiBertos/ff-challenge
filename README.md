@@ -85,14 +85,14 @@ Use a CSS framework if it helps in the UI.
 - [x] Create github repo
 - [x] Create a Backbone app
 - [x] Connect to API
-- [ ] List elements
+- [x] List elements
 - [x] Show element details
-- [ ] Create new elements
-- [ ] Update existing elements
+- [x] Create new elements
+- [x] Update existing elements
 - [x] Remove elements
 - [ ] Implement JS tests
-- [ ] Create Heroku app
-- [ ] Deploy to Heroku
+- [x] Create Heroku app
+- [x] Deploy to Heroku
 - [ ] Build and API
 - [ ] Return list elements from own API
 - [ ] Return requested element from own API

@@ -10,7 +10,7 @@ var PostEditView = Backbone.View.extend({
     render: function() {
         var template = _.template(
             '<form method="post">' +
-            'Title: <input type="text" name="title" value="<%= title %>"><br>' +
+            'Title: <input type="text" name="title" value="<%= (title)? title : "" %>"><br>' +
             'Content: <input type="text" name="content" value="<%= content %>"><br>' +
             'Lat: <input type="text" name="lat" value="<%= lat %>"><br>' +
             'Long: <input type="text" name="long" value="<%= long %>"><br>' +
@@ -19,6 +19,8 @@ var PostEditView = Backbone.View.extend({
             '</form>'
         );
         this.$el.html(template(this.model.toJSON()));
+
+        return this;
     },
 
     updatePost: function(e) {

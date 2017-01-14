@@ -11,9 +11,12 @@
         "url": "http://blog.javierbertos.name/"
     },
     "scripts": {
-        "start": "http-server"
+        "start": "http-server",
+        "postinstall" : "bower install"
     },
-    "dependencies": {},
+    "dependencies": {
+        "bower": "^1.8.0"
+    },
     "devDependencies": {
         "http-server": "^0.9.0"
     }

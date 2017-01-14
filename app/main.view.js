@@ -2,8 +2,23 @@ var MainView = Backbone.View.extend({
     el: $('#main'),
 
     events: {
-        'click .js-create-post' : 'createPost',
-        'click .js-retrieve-post' : 'retrievePost'
+        'click .js-create-post' : 'createPost'
+    },
+
+    render : function() {
+        var view = this;
+
+        view.$el.find('#listHolder').empty();
+
+        if (this.collection.length) {
+            this.collection.forEach(function(post) {
+                view.$el.find('#listHolder').append((new PostDetailsView({model: post})).render().el);
+            });
+        } else {
+            view.$el.find('#listHolder').append('<p class="alert">No posts available</p>');
+        }
+
+        return this;
     },
 
     createPost : function(e) {
@@ -12,23 +27,25 @@ var MainView = Backbone.View.extend({
         postEditView.render();
 
         this.$el.find('#postHolder').html(postEditView.el);
-        postEditView.on('endEdit', this.viewPost, this);
+        postEditView.on('endEdit', this.addToCollection, this);
     },
 
-    retrievePost : function(e) {
-        this.post.set({id: $(e.currentTarget).data('id')});
-        this.post.fetch();
-        this.viewPost();
+    addToCollection: function() {
+        if (this.post && this.post.hasChanged()) {
+            this.collection.add(this.post);
+        }
     },
 
-    viewPost : function(e) {
-        var postDetailsView = new PostDetailsView({model: this.post});
-        postDetailsView.render();
-
-        this.$el.find('#postHolder').html(postDetailsView.el);
+    updateList: function() {
+        this.collection.fetch();
     },
 
     initialize: function() {
-        this.post = new Post();
+        this.post = undefined;
+
+        this.collection = new PostList();
+        this.collection.on('reset add remove', this.render, this);
+        this.collection.on('destroy', this.updateList, this);
+        this.collection.fetch();
     }
 });
