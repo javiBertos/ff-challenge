@@ -46,6 +46,26 @@ var MainView = Backbone.View.extend({
             that.checkMapToRefresh();
         });
     },
+    
+    // show modal box
+    showModalBg: function(box) {
+        // show modal bg
+        this.$el.find('.js-modal-bg').animate({opacity: 1, top: 0, left: 0, width: '100vw', height: '100vh'}, 500);
+        
+        // show modal box
+        box.addClass('js-modal-box').animate({opacity: 1, width: '40%', height: 'auto', left: '30%', height: '100vh'}, 500);
+    },
+    
+    // hide modal box
+    hideModalBox: function() {
+        // hide modal bg
+        this.$el.find('.js-modal-bg').animate({opacity: 0, top: '50%', left: '50%', width: 0, height: 0}, 500);
+        
+        // hide modal box
+        this.$el.find('.js-modal-box').animate({opacity: 0, width: 0, height: 0, left: '50%', height: '50%'}, 500, function() {
+            this.remove();
+        });
+    },
 
     // show the form to create a new post
     createPost : function(e) {
@@ -57,18 +77,20 @@ var MainView = Backbone.View.extend({
         // initialize a new post
         this.post = new Post();
         var postEditView = new PostEditView({model: this.post});
-
+        
         // add the view to the DOM and keep listening till the end
         postEditView.render().$el.insertAfter(document.getElementsByTagName('header')[0]);
+        // show modal box
+        this.showModalBg(postEditView.$el);
+        // set focus on first input element
         postEditView.$el.find('input:first-child').focus();
+        // listen when edit has finished
         postEditView.on('endEdit', this.addToCollection, this);
+        postEditView.on('endEdit', this.hideModalBox, this);
     },
 
     // add to the collection a new element or a edited one...
     addToCollection: function() {
-        // remove form holder
-        this.$el.find('.js-new-form').remove();
-
         // add post to collection if it has been saved
         if (this.post && this.post.hasChanged()) {
             this.collection.remove(this.post);
@@ -89,9 +111,14 @@ var MainView = Backbone.View.extend({
         // this is for update the collection with the edited data
         this.post.on('change', this.addToCollection, this);
         var postDetails = new PostDetailsView({model: this.post});
-
-        // adding the view element to the DOM
+        
+        // adding the view element to the DOM making a fade effect
         postDetails.render().$el.insertAfter(document.getElementsByTagName('header')[0]);
+        // show modal box
+        this.showModalBg(postDetails.$el);
+        
+        // listen when edit has finished
+        postDetails.on('endView', this.hideModalBox, this);
     },
 
     // we update de collection againts the server if an element is deleted because we don't have the reference...

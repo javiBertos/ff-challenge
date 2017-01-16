@@ -144,30 +144,17 @@ textarea {
     height: 60vh;
 }
 
-/* create new post form */
-.box > .post-form {
-    position: fixed;
-    top: 18%;
-    left: 30%;
-    width: 40%;
-    padding: 1%;
-    max-height: 70%;
-    overflow: auto;
-    z-index: 9999;
-    background: rgba(125, 196, 254, 1);
-    border:1px solid #fff;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
+/* create new post form and post details */
+.box > .post-form,
 .box > .post-details {
     position: fixed;
-    top: 18%;
-    left: 30%;
-    width: 40%;
-    padding: 1%;
+    opacity: 0;
+    width: 0;
+    height: 0;
     max-height: 70%;
+    top: 18%;
+    left: 50%;
+    padding: 1%;
     overflow: auto;
     z-index: 9999;
     background: rgba(125, 196, 254, 1);
@@ -180,6 +167,17 @@ textarea {
 .box > .post-details .d-none.close {
     display: inline-block;
     float: right;
+}
+
+.box > .modal-bg {
+    position: fixed;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 9998;
+    background: rgba(125, 196, 254, .75);
 }
 
 /* extra */

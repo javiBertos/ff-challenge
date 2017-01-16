@@ -5,6 +5,7 @@ var PostList = Backbone.Collection.extend({
     //url: 'http://127.0.0.1:3000/posts', // rails local
     url: 'https://ff-challenge-rails-api.herokuapp.com/posts', // rails heroku
 
+    // get items from the server. No pagination available for this version
     fetch: function() {
         var xhr = new XMLHttpRequest(),
             collection = this;

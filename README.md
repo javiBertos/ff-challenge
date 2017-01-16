@@ -93,7 +93,7 @@ Use a CSS framework if it helps in the UI.
 - [ ] Implement JS tests
 - [x] Create Heroku app
 - [x] Deploy to Heroku :link: https://ff-challenge.herokuapp.com
-- [ ] Make it pretty :heart_decoration:
+- [x] Make it pretty :heart_decoration:
 - [x] Build an API
 - [x] Return list elements from own API
 - [x] Return requested element from own API
@@ -103,5 +103,5 @@ Use a CSS framework if it helps in the UI.
 - [x] Validate title and content are required
 - [x] Create API Heroku app
 - [x] Deploy API to Heroku :link: https://ff-challenge-rails-api.herokuapp.com
-- [ ] Play with geo :world_map:
-- [ ] Try to be creative :+1:
+- [x] Play with geo :world_map:
+- [x] Try to be creative :+1:
