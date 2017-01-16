@@ -16,8 +16,8 @@ var PostEditView = Backbone.View.extend({
     // create the element content to add to the DOM. Returns the current object.
     render: function() {
         var template = _.template(
-            'Title: <input type="text" name="title" value="<%= title %>">' +
-            'Content: <textarea name="content" rows="5"><%= content %></textarea>' +
+            'Title: <input type="text" name="title" value="<%= title %>" required>' +
+            'Content: <textarea name="content" rows="5" required><%= content %></textarea>' +
             'Lat: <input type="text" name="lat" value="<%= lat %>">' +
             'Long: <input type="text" name="long" value="<%= long %>">' +
             'Image url: <input type="text" name="image_url" value="<%= image_url %>">' +
