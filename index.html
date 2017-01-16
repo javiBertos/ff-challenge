@@ -4,24 +4,30 @@
         <link rel="icon" href="/favicon.ico">
 
         <title>FinanceFox Challenge</title>
+
+        <link rel="stylesheet" href="/css/main.css" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     </head>
 
     <body>
-        <header>This is the header!!</header>
-
-        <section id="main">
-            <div id="listHolder"></div>
-
-            <div>
+        <div class="box" id="main">
+            <header>
+                <h1>FinanceFox Challenge January 2017</h1>
                 <button class="js-create-post">Create post</button>
-                <div id="postHolder"></div>
-                <div id="editHolder"></div>
-            '</div>
-        </section>
+                <button class="js-switch-view">Switch view</button>
+            </header>
 
-        <footer>This is the footer!!</footer>
+            <section class="js-map"></section>
+
+            <section class="js-list-holder d-none"></section>
+
+            <footer>
+                <h3>Made with <span class="text-red">&hearts;</span> by <a href="http://twitter.com/javibertos">Javier Bertos</a> &copy; 2017</h3>
+            </footer>
+        </div>
 
         <!-- JS libraries -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASTRimI-3Xq9nuhPW-GLbHFd-zqXl7nwg"></script>
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/underscore/underscore-min.js"></script>
         <script src="/bower_components/backbone/backbone-min.js"></script>
@@ -32,8 +38,9 @@
         <script src="/app/post.collection.js"></script>
         <script src="/app/postDetails.view.js"></script>
         <script src="/app/postEdit.view.js"></script>
+        <script src="/app/map.view.js"></script>
 
         <!-- Init application -->
-        <script> var mainView = new MainView(); </script>
+        <script defer> var mainView = new MainView(); </script>
     </body>
 </html>

@@ -1,7 +1,9 @@
 var PostList = Backbone.Collection.extend({
     model: Post,
 
-    url: 'https://challenge-ff-api.herokuapp.com/posts',
+    //url: 'https://challenge-ff-api.herokuapp.com/posts', // original provided
+    //url: 'http://127.0.0.1:3000/posts', // rails local
+    url: 'https://ff-challenge-rails-api.herokuapp.com/posts', // rails heroku
 
     fetch: function() {
         var xhr = new XMLHttpRequest(),

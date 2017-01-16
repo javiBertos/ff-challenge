@@ -1,5 +1,7 @@
 var Post = Backbone.Model.extend({
-    urlRoot: 'https://challenge-ff-api.herokuapp.com/posts',
+    //urlRoot: 'https://challenge-ff-api.herokuapp.com/posts', // original provided
+    //urlRoot: 'http://127.0.0.1:3000/posts', // rails local
+    urlRoot: 'https://ff-challenge-rails-api.herokuapp.com/posts', // rails heroku
 
     defaults: {
         id: undefined,

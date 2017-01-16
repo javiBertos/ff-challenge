@@ -1,22 +1,22 @@
 var PostEditView = Backbone.View.extend({
     tagName: 'form',
+    className: 'post-form',
 
     events: {
         'change input': 'updatePost',
+        'change textarea': 'updatePost',
         'submit': 'savePost',
         'click button.js-cancel': 'cancelEdit'
     },
 
     render: function() {
         var template = _.template(
-            '<form method="post">' +
-            'Title: <input type="text" name="title" value="<%= (title)? title : "" %>"><br>' +
-            'Content: <input type="text" name="content" value="<%= content %>"><br>' +
-            'Lat: <input type="text" name="lat" value="<%= lat %>"><br>' +
-            'Long: <input type="text" name="long" value="<%= long %>"><br>' +
-            'Image url: <input type="text" name="image_url" value="<%= image_url %>"><br>' +
-            '<br><button type="submit">Save</button> <button type="button" class="js-cancel">Cancel</button>' +
-            '</form>'
+            'Title: <input type="text" name="title" value="<%= title %>">' +
+            'Content: <textarea name="content" rows="5"><%= content %></textarea>' +
+            'Lat: <input type="text" name="lat" value="<%= lat %>">' +
+            'Long: <input type="text" name="long" value="<%= long %>">' +
+            'Image url: <input type="text" name="image_url" value="<%= image_url %>">' +
+            '<br><button type="submit">Save</button> <button type="button" class="red js-cancel">Cancel</button>'
         );
         this.$el.html(template(this.model.toJSON()));
 

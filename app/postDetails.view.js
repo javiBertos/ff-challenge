@@ -1,31 +1,35 @@
 var PostDetailsView = Backbone.View.extend({
     tagName: 'article',
+    className: 'post-details',
 
     events: {
         'click .js-remove-post' : 'removePost',
         'click .js-edit-post' : 'editPost',
+        'click .js-close' : 'closePost'
     },
 
     render: function() {
         var template = _.template(
-            '<h2>ID: <%= id %></h2>' +
-            '<% if (title) { %><h3><%= title %></h3><% } %>' +
-            '<% if (content) { %><p><%= content %></p><% } %>' +
-            '<% if (lat && long) { %><ul>' +
-            '<li>Lat: <%= lat %></li>' +
-            '<li>Long: <%= long %></li>' +
-            '<li><a href="https://www.google.com/maps/search/<%= lat %>,<%= long %>" target="_blank">View on GMaps</a></li>' +
-            '</ul><% } %>' +
+            '<h2><%= title %></h2>' +
+            '<p><%= content %></p>' +
             '<% if (image_url) { %><img src="<%= image_url %>" alt="<%= title %>" title="<%= title %>"><br><% } %>' +
-            '<button class="js-edit-post">Edit post</button><br>' +
-            '<button class="js-remove-post">Remove post</button>'
+            '<% if (lat && long) { %><p>' +
+            '<a href="https://www.google.com/maps/search/<%= lat %>,<%= long %>" target="_blank">View on GMaps</a><br>' +
+            '<small>(Lat: <%= lat %>, Long: <%= long %>)</small>' +
+            '</p><% } %>' +
+            '<div><button class="js-edit-post">Edit post</button> <button class="red js-remove-post">Remove post</button> <button class="js-close close d-none">Close</button></div>'
         );
         this.$el.html(template(this.model.toJSON()));
+
         return this;
     },
 
     removePost: function(e) {
         this.model.destroy();
+        this.closePost();
+    },
+
+    closePost: function(e) {
         this.$el.remove();
     },
 
