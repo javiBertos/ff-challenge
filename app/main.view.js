@@ -75,8 +75,8 @@ var MainView = Backbone.View.extend({
         }
 
         // initialize a new post
-        this.post = new Post();
-        var postEditView = new PostEditView({model: this.post});
+        this.model = new Post();
+        var postEditView = new PostEditView({model: this.model});
         
         // add the view to the DOM and keep listening till the end
         postEditView.render().$el.insertAfter(document.getElementsByTagName('header')[0]);
@@ -92,9 +92,9 @@ var MainView = Backbone.View.extend({
     // add to the collection a new element or a edited one...
     addToCollection: function() {
         // add post to collection if it has been saved
-        if (this.post && this.post.hasChanged()) {
-            this.collection.remove(this.post);
-            this.collection.add(this.post);
+        if (this.model && this.model.hasChanged()) {
+            this.collection.remove(this.model);
+            this.collection.add(this.model);
         }
     },
 
@@ -106,11 +106,11 @@ var MainView = Backbone.View.extend({
         }
 
         // here I can get the record from the collection, but I want to force de fetch from the model
-        this.post = new Post({id: $(e.currentTarget).data('id')});
-        this.post.fetch();
+        this.model = new Post({id: $(e.currentTarget).data('id')});
+        this.model.fetch();
         // this is for update the collection with the edited data
-        this.post.on('change', this.addToCollection, this);
-        var postDetails = new PostDetailsView({model: this.post});
+        this.model.on('change', this.addToCollection, this);
+        var postDetails = new PostDetailsView({model: this.model});
         
         // adding the view element to the DOM making a fade effect
         postDetails.render().$el.insertAfter(document.getElementsByTagName('header')[0]);
@@ -127,8 +127,6 @@ var MainView = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.post = undefined;
-
         // posts collection
         this.collection = new PostList();
 
