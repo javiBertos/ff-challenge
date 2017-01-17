@@ -21,11 +21,11 @@ var Post = Backbone.Model.extend({
     // by default, we initialize all values to 'undefined'
     defaults: {
         id: undefined,
-        title: undefined,
-        content: undefined,
-        lat: undefined,
-        long: undefined,
-        image_url: undefined
+        title: '',
+        content: '',
+        lat: '',
+        long: '',
+        image_url: ''
     },
 
     // get current element from server. Almost ID is needed

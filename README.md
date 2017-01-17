@@ -90,7 +90,7 @@ Use a CSS framework if it helps in the UI.
 - [x] Create new elements
 - [x] Update existing elements
 - [x] Remove elements
-- [ ] Implement JS tests
+- [x] Implement JS tests :link: https://ff-challenge.herokuapp.com/specRunner.html
 - [x] Create Heroku app
 - [x] Deploy to Heroku :link: https://ff-challenge.herokuapp.com
 - [x] Make it pretty :heart_decoration:

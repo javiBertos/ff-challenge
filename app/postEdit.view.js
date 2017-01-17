@@ -1,7 +1,7 @@
 var PostEditView = Backbone.View.extend({
     // our parent element will be a form
     tagName: 'form',
-    
+
     // and will have the class name 'post-details'
     className: 'post-form',
 
@@ -18,8 +18,8 @@ var PostEditView = Backbone.View.extend({
         var template = _.template(
             'Title: <input type="text" name="title" value="<%= title %>" required>' +
             'Content: <textarea name="content" rows="5" required><%= content %></textarea>' +
-            'Lat: <input type="text" name="lat" value="<%= lat %>">' +
-            'Long: <input type="text" name="long" value="<%= long %>">' +
+            'Lat: <input type="number" step="0.0000001" name="lat" value="<%= lat %>">' +
+            'Long: <input type="number" step="0.0000001" name="long" value="<%= long %>">' +
             'Image url: <input type="text" name="image_url" value="<%= image_url %>">' +
             '<br><button type="submit">Save</button> <button type="button" class="red js-cancel">Cancel</button>'
         );

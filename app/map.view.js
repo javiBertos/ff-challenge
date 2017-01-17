@@ -1,6 +1,6 @@
 var MapView = Backbone.View.extend({
     defaultMapCenter: {lat: 41.3775556, lng: 2.1488669},
-    
+
     render: function() {
         var timeout = 500,
             interval = 200;
@@ -19,6 +19,10 @@ var MapView = Backbone.View.extend({
                         lat: parseFloat(this.collection.models[i].get('lat')),
                         lng: parseFloat(this.collection.models[i].get('long'))
                     };
+
+                if (isNaN(markerPosition.lat) || isNaN(markerPosition.lng)) {
+                    return true;
+                }
 
                 // add location to map bounds so can show the map with all de markers
                 this.bounds.extend(markerPosition)
@@ -63,7 +67,7 @@ var MapView = Backbone.View.extend({
                     title: info.getTitle
                 })
             );
-            
+
             // once it created, we also setup de info window that appears when you click on it
             that.addInfoWindowToMarker(
                 that.markers.length - 1,
