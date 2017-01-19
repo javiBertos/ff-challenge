@@ -1,1 +1,1 @@
-var mainView = new MainView({model: new Post()});
+var mainView = new MainView({ model: new Post() });

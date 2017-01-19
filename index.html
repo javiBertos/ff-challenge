@@ -2,7 +2,7 @@
 <html>
     <head>
         <link rel="icon" href="/favicon.ico">
-        
+
         <!-- Avoid browser cache JS files (and others) -->
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
@@ -29,25 +29,28 @@
             <footer>
                 <h3>Made with <span class="text-red">&hearts;</span> by <a href="http://twitter.com/javibertos">Javier Bertos</a> &copy; 2017</h3>
             </footer>
-            
+
             <div class="js-modal-bg modal-bg"></div>
         </div>
 
         <!-- JS libraries -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASTRimI-3Xq9nuhPW-GLbHFd-zqXl7nwg"></script>
-        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="/bower_components/underscore/underscore-min.js"></script>
-        <script src="/bower_components/backbone/backbone-min.js"></script>
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/underscore/underscore-min.js"></script>
+        <script src="/node_modules/backbone/backbone-min.js"></script>
 
-        <!-- App JS scripts -->
-        <script src="/app/main.view.js"></script>
-        <script src="/app/post.model.js"></script>
-        <script src="/app/post.collection.js"></script>
-        <script src="/app/postDetails.view.js"></script>
-        <script src="/app/postEdit.view.js"></script>
-        <script src="/app/map.view.js"></script>
-
-        <!-- Init application -->
-        <script defer src="/app/app.js"></script>
+        <!-- module loader -->
+        <script src="/node_modules/systemjs/dist/system.js"></script>
+        <script>
+            System.config({
+                packages: {
+                    ".": {
+                        format: "cjs",
+                        defaultExtension: "js"
+                    }
+                }
+            });
+            System.import( "./app/bootstrap" );
+        </script>
     </body>
 </html>
