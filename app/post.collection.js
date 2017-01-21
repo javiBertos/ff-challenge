@@ -1,29 +1,19 @@
-var PostList = Backbone.Collection.extend({
-    model: Post,
-
-    //url: 'https://challenge-ff-api.herokuapp.com/posts', // original provided
-    //url: 'http://127.0.0.1:3000/posts', // rails local
-    url: 'https://ff-challenge-rails-api.herokuapp.com/posts', // rails heroku
-
-    // get items from the server. No pagination available for this version
-    fetch: function() {
-        var xhr = new XMLHttpRequest(),
-            collection = this;
-
-        xhr.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                if (this.status == 200) {
-                    collection.reset(this.response);
-                } else {
-                    alert("Something went wrong while fetching data:\n (" + response.status + ") " + response.statusText);
-                }
-            }
-        });
-
-        xhr.open('GET', this.url);
-
-        xhr.setRequestHeader("content-type", "application/json");
-        xhr.responseType = 'json';
-        xhr.send();
-    },
-});
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var post_model_1 = require("./post.model");
+var PostList = (function (_super) {
+    __extends(PostList, _super);
+    function PostList() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.model = post_model_1.Post;
+        _this.url = 'https://ff-challenge-rails-api.herokuapp.com/posts';
+        return _this;
+    }
+    return PostList;
+}(Backbone.Collection));
+exports.PostList = PostList;
+//# sourceMappingURL=post.collection.js.map

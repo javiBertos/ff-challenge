@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/macos
+# Created by https://www.gitignore.io/api/macos,visualstudiocode
 
 ### macOS ###
 *.DS_Store
@@ -25,8 +25,15 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.gitignore.io/api/macos
 
-# custom ignores
-bower_components
+### VisualStudioCode ###
+.vscode/
+
+# End of https://www.gitignore.io/api/macos,visualstudiocode
+
+### npm ###
 node_modules
+npm-debug.log
+
+### typings folder to assist typescript ###
+typings/
