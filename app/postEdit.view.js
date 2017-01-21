@@ -1,56 +1,52 @@
-var PostEditView = Backbone.View.extend({
-    // our parent element will be a form
-    tagName: 'form',
-
-    // and will have the class name 'post-details'
-    className: 'post-form',
-
-    // events setup
-    events: {
-        'change input': 'updatePost',
-        'change textarea': 'updatePost',
-        'submit': 'savePost',
-        'click button.js-cancel': 'endEdit'
-    },
-
-    // create the element content to add to the DOM. Returns the current object.
-    render: function() {
-        var template = _.template(
-            'Title: <input type="text" name="title" value="<%= title %>" required>' +
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var PostEditView = (function (_super) {
+    __extends(PostEditView, _super);
+    function PostEditView(options) {
+        var _this = this;
+        options.tagName = 'form';
+        options.className = 'post-form';
+        _this = _super.call(this, options) || this;
+        return _this;
+    }
+    PostEditView.prototype.events = function () {
+        return {
+            'change input': 'updatePost',
+            'change textarea': 'updatePost',
+            'submit': 'savePost',
+            'click button.js-cancel': 'endEdit'
+        };
+    };
+    PostEditView.prototype.render = function () {
+        var template = _.template('Title: <input type="text" name="title" value="<%= title %>" required>' +
             'Content: <textarea name="content" rows="5" required><%= content %></textarea>' +
             'Lat: <input type="number" step="0.0000001" name="lat" value="<%= lat %>">' +
             'Long: <input type="number" step="0.0000001" name="long" value="<%= long %>">' +
             'Image url: <input type="text" name="image_url" value="<%= image_url %>">' +
-            '<br><button type="submit">Save</button> <button type="button" class="red js-cancel">Cancel</button>'
-        );
-        this.$el.html(template(this.model.toJSON()));
-
+            '<br><button type="submit">Save</button> <button type="button" class="red js-cancel">Cancel</button>');
+        this.$el.html(template(this.model.attributes));
         return this;
-    },
-
-    // each time a field changes, we storage the change before assing to the model, so if the user cancels, no change has been performed
-    updatePost: function(e) {
+    };
+    PostEditView.prototype.updatePost = function (e) {
         this.updates[e.currentTarget.name] = e.currentTarget.value;
-    },
-
-    // persist the model changes on the server
-    savePost: function(e) {
-        // lock the form submision
+    };
+    PostEditView.prototype.savePost = function (e) {
         e.preventDefault();
-        // assign the stored changes to the model
         this.model.set(this.updates);
-        // save to the server
         this.model.save();
-        // close the form
         this.endEdit();
-    },
-
-    // launch a trigger about the end to control how to remove from the origin
-    endEdit: function() {
+    };
+    PostEditView.prototype.endEdit = function () {
         this.trigger('endEdit');
-    },
-
-    initialize: function() {
+    };
+    PostEditView.prototype.initialize = function () {
         this.updates = {};
-    }
-});
+    };
+    return PostEditView;
+}(Backbone.View));
+exports.PostEditView = PostEditView;
+//# sourceMappingURL=postEdit.view.js.map

@@ -1,110 +1,79 @@
-var MapView = Backbone.View.extend({
-    defaultMapCenter: {lat: 41.3775556, lng: 2.1488669},
-
-    render: function() {
-        var timeout = 500,
-            interval = 200;
-
-        // remove previous markers on map
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var MapView = (function (_super) {
+    __extends(MapView, _super);
+    function MapView() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.defaultMapCenter = { lat: 41.3775556, lng: 2.1488669 };
+        return _this;
+    }
+    MapView.prototype.render = function () {
+        var timeout = 500, interval = 200;
         this.clearMarkers();
-
-        // add all post markers
         if (this.collection.length) {
             this.bounds = new google.maps.LatLngBounds();
-
-            // prepare each post to add its marker to the map
             for (var i = 0; i < this.collection.length; i++) {
-                // set location for post
                 var markerPosition = {
-                        lat: parseFloat(this.collection.models[i].get('lat')),
-                        lng: parseFloat(this.collection.models[i].get('long'))
-                    };
-
-                if (isNaN(markerPosition.lat) || isNaN(markerPosition.lng)) {
-                    return true;
+                    lat: parseFloat(this.collection.models[i].get('lat')),
+                    lng: parseFloat(this.collection.models[i].get('long'))
+                };
+                if (!isNaN(markerPosition.lat) && !isNaN(markerPosition.lng)) {
+                    this.bounds.extend(markerPosition);
+                    this.addMarkersWithTimeout(markerPosition, this.collection.models[i], timeout + i * interval);
                 }
-
-                // add location to map bounds so can show the map with all de markers
-                this.bounds.extend(markerPosition)
-
-                // the markers will be added qith a timeout
-                this.addMarkersWithTimeout(markerPosition, this.collection.models[i], timeout + i * interval);
-            };
+            }
+            ;
         }
-
-        // center and zoom de map based on the markers available
         this.centerMap();
-    },
-
-    // remove all markers from the map
-    clearMarkers: function() {
-        // to do that, we must go over each marker and set its map to null
+        return this;
+    };
+    MapView.prototype.clearMarkers = function () {
         if (this.markers && this.markers.length) {
             for (var i = 0; i < this.markers.length; i++) {
                 this.markers[i].setMap(null);
             }
         }
-
-        // add default initial point to keep map centered on the default point
         this.bounds = new google.maps.LatLngBounds();
         this.bounds.extend(this.defaultMapCenter);
-
-        // reset markers array. markers are now deleted
         this.markers = [];
-    },
-
-    // show markers with a delay so we create an effect of fallin one then each other
-    addMarkersWithTimeout: function(position, info, timeout) {
+    };
+    MapView.prototype.addMarkersWithTimeout = function (position, info, timeout) {
         var that = this;
-
-        // we schedule the mar creation
-        window.setTimeout(function() {
-            that.markers.push(
-                new google.maps.Marker({
-                    position: position,
-                    map: that.map,
-                    animation: google.maps.Animation.DROP,
-                    title: info.getTitle
-                })
-            );
-
-            // once it created, we also setup de info window that appears when you click on it
-            that.addInfoWindowToMarker(
-                that.markers.length - 1,
-                info
-            );
+        window.setTimeout(function () {
+            that.markers.push(new google.maps.Marker({
+                position: position,
+                map: that.map,
+                animation: google.maps.Animation.DROP,
+                title: info.getTitle
+            }));
+            that.addInfoWindowToMarker(that.markers.length - 1, info);
         }, timeout);
-    },
-
-    // setup and connect each marker with its info window
-    addInfoWindowToMarker: function(markerIndex, info) {
-        var that = this,
-            contentString = '<div id="content">' +
-                '<h1 id="firstHeading" class="firstHeading">' + info.get('title') + '</h1>' +
-                '<p id="bodyContent">' + info.get('content') + '</p>' +
-                '<button class="js-view-post" data-id="' + info.get('id') + '">View post</button>' +
-                '</div>',
-            infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-
-        // and setup the event link no show it
-        this.markers[markerIndex].addListener('click', function() {
+    };
+    MapView.prototype.addInfoWindowToMarker = function (markerIndex, info) {
+        var that = this, contentString = '<div id="content">' +
+            '<h1 id="firstHeading" class="firstHeading">' + info.get('title') + '</h1>' +
+            '<p id="bodyContent">' + info.get('content') + '</p>' +
+            '<button class="js-view-post" data-id="' + info.get('id') + '">View post</button>' +
+            '</div>', infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        this.markers[markerIndex].addListener('click', function () {
             infowindow.open(that.map, that.markers[markerIndex]);
         });
-    },
-
-    // this centers the map by the default point (FinanceFox BCN HQ) or to allow view all the points in the visible area
-    centerMap: function() {
+    };
+    MapView.prototype.centerMap = function () {
         if (this.bounds) {
             this.map.fitBounds(this.bounds);
-        } else {
+        }
+        else {
             this.map.setCenter(this.defaultMapCenter);
         }
-    },
-
-    initialize: function() {
-        // create and draw the map
+    };
+    MapView.prototype.initialize = function () {
         this.map = new google.maps.Map(this.el, {
             zoom: 4,
             center: this.defaultMapCenter,
@@ -112,8 +81,9 @@ var MapView = Backbone.View.extend({
             scrollwheel: false,
             mapTypeControl: false
         });
-
-        // listen for a change in the collection to update the map
         this.collection.on('change', this.render, this);
-    }
-});
+    };
+    return MapView;
+}(Backbone.View));
+exports.MapView = MapView;
+//# sourceMappingURL=map.view.js.map
