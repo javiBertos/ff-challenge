@@ -34,3 +34,6 @@ Temporary Items
 ### npm ###
 node_modules
 npm-debug.log
+
+### typings folder to assist typescript ###
+typings/

@@ -4,6 +4,8 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "rootDir": "./app_src",
-        "outDir": "./app"
+        "outDir": "./app",
+        "removeComments": true,
+        "sourceMap": true
     }
 }

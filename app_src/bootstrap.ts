@@ -1,6 +1,5 @@
-function bracify (text: string): string {
-    return "{" + text + "}";
-}
+import {MainView} from "./main.view";
+import {Post} from "./post.model";
 
-var bracified = bracify("Hello world!");
-console.log( bracified );
+// var mainView = new MainView({model: new Post()});
+new MainView({el: $('#main'), model: new Post()});
