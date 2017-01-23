@@ -3,7 +3,7 @@
         "target": "ES5",
         "module": "commonjs",
         "moduleResolution": "node",
-        "rootDir": "./app_src",
+        "rootDir": "./ts",
         "outDir": "./app",
         "removeComments": true,
         "sourceMap": true

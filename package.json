@@ -13,11 +13,11 @@
   "scripts": {
     "prestart": "npm install",
     "start": "http-server",
-    "start-dev": "typings install && tsc -v && tsc && npm run build-css && concurrently \"npm run tsc:w\" \"npm run build-css:w\" && http-server -s",
+    "start-dev": "typings install && tsc -v && tsc && npm run build-css && concurrently \"http-server -s\" \"npm run tsc:w\" \"npm run build-css:w\"",
     "tsc": "tsc --prety",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "build-css": "node-sass scss --include-path Scss --recursive --output css",
+    "build-css": "node-sass scss --include-path scss --recursive --output css",
     "build-css:w": "nodemon -e scss -x \"npm run build-css\"",
     "build-assets": "tsc && npm run build-css"
   },
