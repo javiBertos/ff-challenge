@@ -1,3 +1,5 @@
+import {Post} from "./post.model";
+
 export class MapView extends Backbone.View<Backbone.Model> {
     private defaultMapCenter = {lat: 41.3775556, lng: 2.1488669};
 
@@ -5,8 +7,8 @@ export class MapView extends Backbone.View<Backbone.Model> {
     private bounds: any;
     private markers: Array<any>;
 
-    render() {
-        var timeout = 500,
+    render(): MapView {
+        let timeout = 500,
             interval = 200;
 
         // remove previous markers on map
@@ -17,11 +19,11 @@ export class MapView extends Backbone.View<Backbone.Model> {
             this.bounds = new google.maps.LatLngBounds();
 
             // prepare each post to add its marker to the map
-            for (var i = 0; i < this.collection.length; i++) {
+            for (let i = 0; i < this.collection.length; i++) {
                 // set location for post
-                var markerPosition = {
-                        lat: parseFloat(this.collection.models[i].get('lat')),
-                        lng: parseFloat(this.collection.models[i].get('long'))
+                let markerPosition = {
+                        lat: +this.collection.models[i].get('lat'),
+                        lng: +this.collection.models[i].get('long')
                     };
 
                 if (!isNaN(markerPosition.lat) && !isNaN(markerPosition.lng)) {
@@ -41,11 +43,11 @@ export class MapView extends Backbone.View<Backbone.Model> {
     }
 
     // remove all markers from the map
-    clearMarkers() {
+    private clearMarkers() {
         // to do that, we must go over each marker and set its map to null
         if (this.markers && this.markers.length) {
-            for (var i = 0; i < this.markers.length; i++) {
-                this.markers[i].setMap(null);
+            for (let marker of this.markers) {
+                marker.setMap(null);
             }
         }
 
@@ -57,9 +59,9 @@ export class MapView extends Backbone.View<Backbone.Model> {
         this.markers = [];
     }
 
-    // show markers with a delay so we create an effect of fallin one then each other
-    addMarkersWithTimeout(position, info, timeout) {
-        var that = this;
+    // show markers with a delay so we create an effect of falling one then each other
+    private addMarkersWithTimeout(position: {lat: number, lng: number}, info: Post|any, timeout: number) {
+        let that = this;
 
         // we schedule the mar creation
         window.setTimeout(function() {
@@ -68,7 +70,7 @@ export class MapView extends Backbone.View<Backbone.Model> {
                     position: position,
                     map: that.map,
                     animation: google.maps.Animation.DROP,
-                    title: info.getTitle
+                    title: info.get('title')
                 })
             );
 
@@ -81,25 +83,26 @@ export class MapView extends Backbone.View<Backbone.Model> {
     }
 
     // setup and connect each marker with its info window
-    addInfoWindowToMarker(markerIndex, info) {
-        var that = this,
-            contentString = '<div id="content">' +
-                '<h1 id="firstHeading" class="firstHeading">' + info.get('title') + '</h1>' +
-                '<p id="bodyContent">' + info.get('content') + '</p>' +
-                '<button class="js-view-post" data-id="' + info.get('id') + '">View post</button>' +
-                '</div>',
-            infowindow = new google.maps.InfoWindow({
+    private addInfoWindowToMarker(markerIndex: number, info: Post) {
+        let that = this,
+            contentString = `
+                <div id="content">
+                    <h1 id="firstHeading" class="firstHeading">${info.get('title')}</h1>
+                    <p id="bodyContent">${info.get('content')}</p>
+                    <button class="js-view-post" data-id="${info.get('id')}">View post</button>
+                </div>`,
+            infoWindow = new google.maps.InfoWindow({
                 content: contentString
             });
 
         // and setup the event link no show it
         this.markers[markerIndex].addListener('click', function() {
-            infowindow.open(that.map, that.markers[markerIndex]);
+            infoWindow.open(that.map, that.markers[markerIndex]);
         });
     }
 
     // this centers the map by the default point (FinanceFox BCN HQ) or to allow view all the points in the visible area
-    centerMap() {
+    private centerMap() {
         if (this.bounds) {
             this.map.fitBounds(this.bounds);
         } else {

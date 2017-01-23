@@ -13,7 +13,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "http-server",
-    "start-dev": "typings install && tsc -v && tsc && npm run build-css && concurrently \"http-server -s\" \"npm run tsc:w\" \"npm run build-css:w\"",
+    "start-dev": "tsc -v && tsc && npm run build-css && concurrently \"http-server -s\" \"npm run tsc:w\" \"npm run build-css:w\"",
     "tsc": "tsc --prety",
     "tsc:w": "tsc -w",
     "typings": "typings",

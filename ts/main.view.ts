@@ -35,7 +35,6 @@ export class MainView extends Backbone.View<Backbone.Model> {
             holder.append('<article class="text-red">No posts available</article>');
         }
 
-
         return this;
     }
 
@@ -49,7 +48,7 @@ export class MainView extends Backbone.View<Backbone.Model> {
 
     // switch the view between map and list
     switchView() {
-        var that = this;
+        let that = this;
 
         that.$el.find('section').slideToggle('fast', function() {
             that.checkMapToRefresh();
@@ -85,7 +84,7 @@ export class MainView extends Backbone.View<Backbone.Model> {
 
         // initialize a new post
         this.model = new Post();
-        var postEditView = new PostEditView({model: this.model});
+        let postEditView = new PostEditView({model: this.model});
         
         // add the view to the DOM and keep listening till the end
         postEditView.render().$el.insertAfter(document.getElementsByTagName('header')[0]);
@@ -119,7 +118,7 @@ export class MainView extends Backbone.View<Backbone.Model> {
         this.model.fetch();
         // this is for update the collection with the edited data
         this.model.on('change', this.addToCollection, this);
-        var postDetails = new PostDetailsView({model: this.model});
+        let postDetails = new PostDetailsView({model: this.model});
         
         // adding the view element to the DOM making a fade effect
         postDetails.render().$el.insertAfter(document.getElementsByTagName('header')[0]);

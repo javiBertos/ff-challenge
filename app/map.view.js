@@ -18,8 +18,8 @@ var MapView = (function (_super) {
             this.bounds = new google.maps.LatLngBounds();
             for (var i = 0; i < this.collection.length; i++) {
                 var markerPosition = {
-                    lat: parseFloat(this.collection.models[i].get('lat')),
-                    lng: parseFloat(this.collection.models[i].get('long'))
+                    lat: +this.collection.models[i].get('lat'),
+                    lng: +this.collection.models[i].get('long')
                 };
                 if (!isNaN(markerPosition.lat) && !isNaN(markerPosition.lng)) {
                     this.bounds.extend(markerPosition);
@@ -33,8 +33,9 @@ var MapView = (function (_super) {
     };
     MapView.prototype.clearMarkers = function () {
         if (this.markers && this.markers.length) {
-            for (var i = 0; i < this.markers.length; i++) {
-                this.markers[i].setMap(null);
+            for (var _i = 0, _a = this.markers; _i < _a.length; _i++) {
+                var marker = _a[_i];
+                marker.setMap(null);
             }
         }
         this.bounds = new google.maps.LatLngBounds();
@@ -48,21 +49,17 @@ var MapView = (function (_super) {
                 position: position,
                 map: that.map,
                 animation: google.maps.Animation.DROP,
-                title: info.getTitle
+                title: info.get('title')
             }));
             that.addInfoWindowToMarker(that.markers.length - 1, info);
         }, timeout);
     };
     MapView.prototype.addInfoWindowToMarker = function (markerIndex, info) {
-        var that = this, contentString = '<div id="content">' +
-            '<h1 id="firstHeading" class="firstHeading">' + info.get('title') + '</h1>' +
-            '<p id="bodyContent">' + info.get('content') + '</p>' +
-            '<button class="js-view-post" data-id="' + info.get('id') + '">View post</button>' +
-            '</div>', infowindow = new google.maps.InfoWindow({
+        var that = this, contentString = "\n                <div id=\"content\">\n                    <h1 id=\"firstHeading\" class=\"firstHeading\">" + info.get('title') + "</h1>\n                    <p id=\"bodyContent\">" + info.get('content') + "</p>\n                    <button class=\"js-view-post\" data-id=\"" + info.get('id') + "\">View post</button>\n                </div>", infoWindow = new google.maps.InfoWindow({
             content: contentString
         });
         this.markers[markerIndex].addListener('click', function () {
-            infowindow.open(that.map, that.markers[markerIndex]);
+            infoWindow.open(that.map, that.markers[markerIndex]);
         });
     };
     MapView.prototype.centerMap = function () {
